@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>溜溜的生日特别赛季</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 40px 18px;
+      background: #f5f3ee;
+      color: #20283c;
+      font-family: "Microsoft YaHei", sans-serif;
+      line-height: 1.8;
+    }
+    main { max-width: 760px; margin: auto; }
+    .label {
+      color: #856522;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+    h1 {
+      margin: 16px 0;
+      font-size: clamp(38px, 8vw, 68px);
+      line-height: 1.2;
+    }
+    .intro { color: #626878; }
+    .hero, .reward {
+      padding: 32px;
+      border: 1px solid #ded4b7;
+      border-radius: 22px;
+      background: white;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .tags span {
+      padding: 5px 12px;
+      border-radius: 30px;
+      background: #f4f0e4;
+      font-size: 13px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 20px 0;
+    }
+    .card {
+      padding: 22px;
+      background: #fff;
+      border-radius: 16px;
+    }
+    .card small { color: #856522; }
+    .card h2 { margin: 10px 0; font-size: 19px; }
+    .card p { margin: 0; font-size: 14px; color: #626878; }
+    button {
+      width: 100%;
+      padding: 17px;
+      border: 0;
+      border-radius: 12px;
+      background: #20283c;
+      color: #fff;
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover { background: #35415d; }
+    button:focus-visible {
+      outline: 3px solid #b58a32;
+      outline-offset: 4px;
+    }
+    .reward { margin-top: 20px; }
+    .reward h2 { color: #856522; }
+    .sign { font-weight: bold; }
+    footer {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 12px;
+      color: #626878;
+    }
+    footer a { color: inherit; }
+    @media (max-width: 600px) {
+      .cards { grid-template-columns: 1fr; }
+      .hero, .reward { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="label">BIRTHDAY SPECIAL · 生日特别赛季</div>
+      <h1>溜溜，<br>今天你是首发。</h1>
+      <p class="intro">
+        伯纳乌发来贺电，召唤师峡谷等待你上线。<br>
+        新的一岁，准备开个好局！
+      </p>
+      <div class="tags">
+        <span>⚽ 皇家马德里球迷</span>
+        <span>🎮 英雄联盟召唤师</span>
+        <span>🎓 山东大学学子</span>
+      </div>
+    </section>
+
+    <section class="cards" aria-label="新赛季祝福">
+      <article class="card">
+        <small>01 / 主场祝福</small>
+        <h2>看球快乐</h2>
+        <p>愿你支持的球队踢得漂亮，生活里的好消息也接连进球。</p>
+      </article>
+      <article class="card">
+        <small>02 / 峡谷祝福</small>
+        <h2>队友靠谱</h2>
+        <p>顺风有人陪你冲，逆风有人一起扛。排位如此，生活也是。</p>
+      </article>
+      <article class="card">
+        <small>03 / 学业祝福</small>
+        <h2>理论联系实际</h2>
+        <p>读书时思路清晰，休息时尽情快乐。今天先把吃蛋糕落实到实践。</p>
+      </article>
+    </section>
+
+    <button id="claim" type="button"
+            aria-controls="reward" aria-expanded="false">
+      领取溜溜的生日补给 →
+    </button>
+
+    <div aria-live="polite">
+      <section id="reward" class="reward" hidden>
+        <div class="label">REWARD UNLOCKED · 补给已到账</div>
+        <h2>生日快乐，兄弟！🎂</h2>
+        <p>今天的主要矛盾：蛋糕有限，兄弟的胃口无限。</p>
+        <p>
+          祝你新的一岁，论文思路清晰，排位队友靠谱，
+          皇马比赛看得痛快。
+        </p>
+        <p>
+          有球看，有局开，有兄弟一起吃饭。
+          愿你认真追求的事情有进展，也总能找到让自己开心的小事。
+        </p>
+        <p class="sign">今天不讲大道理，你快乐就完事了。</p>
+      </section>
+    </div>
+
+    <footer>
+      兄弟出品 · 非官方球迷生日企划<br>
+      彩纸动画：
+      <a href="https://github.com/catdad/canvas-confetti">
+        canvas-confetti
+      </a>
+      （ISC 许可证）
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+  <script>
+    const button = document.getElementById("claim");
+    const reward = document.getElementById("reward");
+
+    button.addEventListener("click", function () {
+      reward.hidden = false;
+      button.setAttribute("aria-expanded", "true");
+      button.textContent = "再庆祝一次 🎉";
+
+      // 动画库没加载成功时，祝福文字仍然可以正常显示。
+      if (typeof window.confetti === "function") {
+        window.confetti({
+          particleCount: 160,
+          spread: 85,
+          origin: { y: 0.65 },
+          colors: ["#d4af37", "#ffffff", "#20283c"],
+          disableForReducedMotion: true
+        });
+      }
+
+      reward.scrollIntoView({ block: "nearest" });
+    });
+  </script>
+</body>
+</html>
